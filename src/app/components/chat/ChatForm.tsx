@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { sendMessageAtom } from "@/app/common/store/chat/chat";
+import { Button } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 export const ChatForm: React.FC = () => {
-  const [message, setMessage] = useState<string>(""); // 入力ボックスのテキストを保持
-  const [, setSender] = useRecoilState(sendMessageAtom); // ユーザーが送信したアクションをグローバルに保管
+  const [message, setMessage] = useState<string>("");
+  const [, setSender] = useRecoilState(sendMessageAtom);
 
   const sendMessage = async () => {
     if (!message) return;
@@ -25,7 +27,7 @@ export const ChatForm: React.FC = () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const data = await response.json();
-      setSender(true); // これでユーザーが送信したというアクションをChatMessageに伝える
+      setSender(true);
     } catch (err) {
       console.error(err);
     }
@@ -47,6 +49,7 @@ export const ChatForm: React.FC = () => {
         <input
           style={{
             width: "100%",
+            lineHeight: 2.5,
             padding: 10,
             borderRadius: 10,
             border: "1px solid #ccc",
@@ -64,20 +67,14 @@ export const ChatForm: React.FC = () => {
             }
           }}
         />
-        <button
-          style={{
-            padding: 10,
-            background: "#006BD6",
-            color: "white",
-            borderRadius: 10,
-            border: "none",
-          }}
+        <Button
+          variant="contained"
           onClick={() => {
             sendMessage();
           }}
         >
-          送信
-        </button>
+          <SendIcon />
+        </Button>
       </div>
     </div>
   );
