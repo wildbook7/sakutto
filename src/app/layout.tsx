@@ -1,6 +1,7 @@
 import "./globals.css";
 import { ReactNode } from "react";
 import Header from "@/app/components/layout/Header";
+import AppProvider from "./provider";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -11,7 +12,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <main
             style={{ background: "#F1F3F7", width: "100%", height: "100vh" }}
           >
-            {children}
+            <AppProvider>{children}</AppProvider>
           </main>
         </body>
       </html>
